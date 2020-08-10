@@ -32,15 +32,22 @@ import streamlit as st
 from Tigernet import *
 from tigerpredict import *
 from TigerSSD import *
+import gdown
 npx.set_np()
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
-model=TigerSSD(1)
-model.load_parameters('models/1ststagetest80.9978991746902466',ctx=mxnet.gpu(0))
-
-model.hybridize()
 
 st.title("Tiger Detection")
+
+st.text("Downloading model")
+k=gdown.download('https://drive.google.com/uc?id=1YZ_2193qZmPtRVpdU5WY7VMp6RU1sgfb')
+st.text("Download finished")
+
+if k:
+   model=TigerSSD(1)
+   model.load_parameters('1ststagetest80.9978991746902466',ctx=mxnet.gpu(0))
+
+model.hybridize()
 
 s=st.file_uploader("Choose an image",type=['png','jpg'])
 if s:
@@ -51,4 +58,3 @@ if s:
    option=int(option)
    im=predict(im4,model,mxnet.gpu(0),option)
    st.image(im)
-
