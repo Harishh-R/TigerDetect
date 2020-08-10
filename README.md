@@ -1,2 +1,2 @@
 # TigerDetect
-This project aims at building an bounding box detector for the tiger in the wild.
+This project aims at building an bounding box detector for tiger in the wild.
